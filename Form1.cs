@@ -27,100 +27,127 @@ namespace WF_cosas
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-
-            using (Ping pi = new Ping())
+            await Task.Run(() =>
             {
-                PingReply pingReply = null;
-                try
+                using (Ping pi = new Ping())
                 {
-                pingReply = pi.Send(ifrgufk, timeout);
-                label5.Text = pingReply.RoundtripTime.ToString();
-                }
-                catch (Exception)
-                {
-                    label5.Text = "No";
-                }
-                if (pingReply.Status.ToString().Equals("Success")) {
-                    pictureBox1.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
-                } else
-                {
-                    pictureBox1.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    PingReply pingReply = null;
+                    try
+                    {
+                        pingReply = pi.Send(ifrgufk, timeout);
+                        label5.Text = pingReply.RoundtripTime.ToString();
+                    }
+                    catch (Exception)
+                    {
+                        Invoke(new System.Action(() =>
+                        {
+                            label5.Text = "No";
+
+                        }));
+                    }
+                    if (pingReply.Status.ToString().Equals("Success"))
+                    {
+                        pictureBox1.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
+                    }
+                    else
+                    {
+                        pictureBox1.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    }
+
                 }
 
-            }
 
-            using (Ping pi2 = new Ping())
-            {
-                PingReply pingReply = null;
-                try
+                using (Ping pi2 = new Ping())
                 {
-                    pingReply = pi2.Send(rgufk, timeout);
-                    label6.Text = pingReply.RoundtripTime.ToString();
-                }
-                catch (Exception)
-                {
-                    label6.Text = "No";
-                }
-                if (pingReply.Status.ToString().Equals("Success"))
-                {
-                    pictureBox2.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
-                }
-                else
-                {
-                    pictureBox2.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
-                }
-            }
-
-
-            using (Ping pi3 = new Ping())
-            {
-                PingReply pingReply = null;
-                pingReply = pi3.Send(cosas, timeout);
-                label7.Text = pingReply.RoundtripTime.ToString();
-                if (pingReply.Status.ToString().Equals("Success"))
-                {
-                    pictureBox3.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
-                }
-                else
-                {
-                    pictureBox3.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
-                }
-            }
-
-            using (Ping pi4 = new Ping())
-            {
-                PingReply pingReply = null;
-                pingReply = pi4.Send(int_ifrgufk, timeout);
-                label9.Text = pingReply.RoundtripTime.ToString();
-                if (pingReply.Status.ToString().Equals("Success"))
-                {
-                    pictureBox4.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
-                }
-                else
-                {
-                    pictureBox4.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    PingReply pingReply = null;
+                    try
+                    {
+                        pingReply = pi2.Send(rgufk, timeout);
+                        label6.Text = pingReply.RoundtripTime.ToString();
+                    }
+                    catch (Exception)
+                    {
+                        Invoke(new System.Action(() =>
+                        {
+                            label6.Text = "No";
+                        }));
+                    }
+                    if (pingReply.Status.ToString().Equals("Success"))
+                    {
+                        pictureBox2.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
+                    }
+                    else
+                    {
+                        pictureBox2.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    }
                 }
 
-            }
-            
-            using (Ping pi5 = new Ping())
-            {
-                PingReply pingReply = null;
-                pingReply = pi5.Send(ITIL, timeout);
-                label11.Text = pingReply.RoundtripTime.ToString();
-                if (pingReply.Status.ToString().Equals("Success"))
+
+                using (Ping pi3 = new Ping())
                 {
-                    pictureBox5.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
-                }
-                else
-                {
-                    pictureBox5.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    PingReply pingReply = null;
+                    pingReply = pi3.Send(cosas, timeout);
+                    
+                    Invoke(new System.Action(() =>
+                    {
+                        label7.Text = pingReply.RoundtripTime.ToString();
+                    }));
+                    
+                    if (pingReply.Status.ToString().Equals("Success"))
+                    {
+                        pictureBox3.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
+                    }
+                    else
+                    {
+                        pictureBox3.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    }
                 }
 
-            }
+                using (Ping pi4 = new Ping())
+                {
+                    PingReply pingReply = null;
+                    pingReply = pi4.Send(int_ifrgufk, timeout);
 
+                    Invoke(new System.Action(() =>
+                    {
+                        label9.Text = pingReply.RoundtripTime.ToString();
+                    }));
+
+                    if (pingReply.Status.ToString().Equals("Success"))
+                    {
+                        pictureBox4.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
+                    }
+                    else
+                    {
+                        pictureBox4.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    }
+
+                }
+
+                using (Ping pi5 = new Ping())
+                {
+                    PingReply pingReply = null;
+                    pingReply = pi5.Send(ITIL, timeout);
+
+                    Invoke(new System.Action(() =>
+                    {
+                        label11.Text = pingReply.RoundtripTime.ToString();
+                    }));
+
+                    if (pingReply.Status.ToString().Equals("Success"))
+                    {
+                        pictureBox5.BackgroundImage = Resources.status_sign_positive_checked_check_accepted_success_icon_220294;
+                    }
+                    else
+                    {
+                        pictureBox5.BackgroundImage = Resources.status_sign_negative_cancel_icon_220300;
+                    }
+
+                }
+
+            });
         }
 
 
