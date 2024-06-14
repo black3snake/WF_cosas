@@ -18,7 +18,8 @@ namespace WF_cosas
             Server server = new Server(this);
             addressaC = server.SetPoleObjets();
 
-
+            button1.Enabled = false;
+            
             await Task.Run(() =>
             {
                 foreach (var address in addressaC.Values)
@@ -27,6 +28,8 @@ namespace WF_cosas
                 }
             });
             
+            button1.Enabled = true;
+
         }
     }
 }
