@@ -1,27 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WF_cosas.Properties;
 
 namespace WF_cosas
 {
     public partial class Form1 : Form
     {
-
-        /*private static string cosas = "172.17.252.243";
-        private static string rgufk = "rgufk.ru";
-        private static string ifrgufk = "ifrgufk.ru";
-        private static string int_ifrgufk = "192.168.0.1";
-        private static string ITIL = "172.17.250.12";*/
-        private static int timeout = 2000;  // 2 сек
-
+        #region Alternative
+        /*private static int timeout = 2000;  // 2 сек
         private static Dictionary<string, string> addressaD = new Dictionary<string, string>
         {
             { "cosas", "172.17.252.243" },
@@ -31,8 +18,10 @@ namespace WF_cosas
             { "ITIL", "172.17.250.12" },
             { "cisco", "84.244.48.75" },
             { "bbb2", "84.244.48.76" }
-        };
+        };*/
+        #endregion
 
+        Dictionary<string, DataS> addressaC = new Dictionary<string, DataS>();
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +29,22 @@ namespace WF_cosas
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            Server server = new Server(this);
+            addressaC = server.SetPoleObjets();
+
+
             await Task.Run(() =>
+            {
+                foreach (var address in addressaC.Values)
+                {
+                    Pinging(address.AddressS, address.TimeOutS, address.LabelS, address.PictureBoxS);
+                }
+            });
+
+
+
+            #region Alternative
+            /*await Task.Run(() =>
             {
                 
                 foreach (var address in addressaD.Keys) {
@@ -49,52 +53,46 @@ namespace WF_cosas
                     {
                         case "cosas":
                             {
-                                Pinging(address, timeout, label7);
+                                Pinging(addressaD[address], timeout, label7, pictureBox3);
                                 break;
                             }
                         case "rgufk":
                             {
-                                Pinging(address, timeout, label6);
+                                Pinging(addressaD[address], timeout, label6, pictureBox2);
                                 break;
                             }
                         case "ifrgufk":
                             {
-                                Pinging(address, timeout, label5);
+                                Pinging(addressaD[address], timeout, label5, pictureBox1);
                                 break;
                             }
                         case "int_ifrgufk":
                             {
-                                Pinging(address, timeout, label9);
+                                Pinging(addressaD[address], timeout, label9, pictureBox4);
                                 break;
                             }
                         case "ITIL":
                             {
-                                Pinging(address, timeout, label1);
+                                Pinging(addressaD[address], timeout, label11, pictureBox5);
                                 break;
                             }
                         case "cisco":
                             {
-                                //Pinging(address, timeout, label5);
+                                Pinging(addressaD[address], timeout, label14, pictureBox6);
                                 break;
                             }
                         case "bbb2":
                             {
-                                //Pinging(address, timeout, label5);
+                                Pinging(addressaD[address], timeout, label15, pictureBox7);
                                 break;
                             }
 
                     }
                 
                 }
-                
-                
 
-
-                
-
-            });
+            });*/
+            #endregion
         }
-
-
     }
 }
